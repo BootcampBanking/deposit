@@ -46,6 +46,7 @@ public class DepositServiceImpl implements DepositService {
         Mono<Deposit> depositMono = findByNumber(dataDeposit.getDepositNumber())
                 .flatMap(__ -> Mono.<Deposit>error(new Error("This deposit number " + dataDeposit.getDepositNumber() + "exists")))
                 .switchIfEmpty(saveTopic(dataDeposit));
+
         return depositMono;
 
 
